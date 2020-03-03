@@ -10,6 +10,14 @@ namespace BinaryTree
     {
         private Node root;
 
+        public Node Root
+        {
+            get
+            {
+                return root;
+            }
+        }
+
         public BinaryTree()
         {
             root = null;
@@ -17,61 +25,60 @@ namespace BinaryTree
 
         public void Add(int data)
         {
-            Node newNode = new Node(data);
-            newNode.info = data;
+            Node parent = new Node(data);
+            parent.info = data;
             if (root == null)
             {
-                root = newNode;
+                root = parent;
             }
             else
             {
                 Node current = root;
-                Node parent;
                 while (true)
                 {
-
                     parent = current;
-
                     if (data < parent.info)
                     {
-                        parent = current.leftChild;
+                        current = parent.leftChild;
                         if (current == null)
                         {
                             parent.leftChild = new Node(data);
                             break;
                         }
+
                     }
                     else
                     {
-                        current = current.leftChild;
+                        current = parent.rightChild;
                         if (current == null)
                         {
                             parent.rightChild = new Node(data);
                             break;
                         }
                     }
-                    
                 }
             }
         }
 
 
-        public void Search(int data)
+        public bool Search(int data)
         {
-            Node node = root;
-            if (node == null)
+            while (root != null)
             {
-                Console.WriteLine("Nothing in tree!");
-            }
-            while (node != null)
-            {
-                if (node.info == data)
+                if (data > root.info)
                 {
-                    Console.WriteLine("Found a match!");
+                    root = root.rightChild;
                 }
+                else if (data < root.info)
+                    root = root.leftChild;
+                else
+                    return true;
             }
-            Console.WriteLine("Not in tree!");
+            return false;
+
         }
+
+
 
 
 
