@@ -10,15 +10,15 @@ namespace BinaryTree
     {
         private Node root;
 
-        public void BinarySearchTree()
+        public BinaryTree()
         {
             root = null;
         }
 
-        public void Add(int i)
+        public void Add(int data)
         {
-            Node newNode = new Node(i);
-            newNode.info = i;
+            Node newNode = new Node(data);
+            newNode.info = data;
             if (root == null)
             {
                 root = newNode;
@@ -26,19 +26,57 @@ namespace BinaryTree
             else
             {
                 Node current = root;
+                Node parent;
                 while (true)
                 {
-                    temp = current;
-                    
-                    if (i < current.info)
+
+                    parent = current;
+
+                    if (data < parent.info)
+                    {
+                        parent = current.leftChild;
+                        if (current == null)
+                        {
+                            parent.leftChild = new Node(data);
+                            break;
+                        }
+                    }
+                    else
                     {
                         current = current.leftChild;
+                        if (current == null)
+                        {
+                            parent.rightChild = new Node(data);
+                            break;
+                        }
                     }
-
+                    
                 }
             }
-
         }
+
+
+        public void Search(int data)
+        {
+            Node node = root;
+            if (node == null)
+            {
+                Console.WriteLine("Nothing in tree!");
+            }
+            while (node != null)
+            {
+                if (node.info == data)
+                {
+                    Console.WriteLine("Found a match!");
+                }
+            }
+            Console.WriteLine("Not in tree!");
+        }
+
+
+
+
+
 
     }
 }

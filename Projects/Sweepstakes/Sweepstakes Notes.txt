@@ -1,0 +1,1 @@
+Dependency Injection can be observed in the MarketingFirm class.  Passing the ISweepstakesManager interface in as a parameter to the MarketingFirm constructor allows us to avoid having to instantiate either or both the queue stack before a sweepstakes manager is chosen.
